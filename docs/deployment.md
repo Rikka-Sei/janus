@@ -100,8 +100,24 @@ DB_CONNECTION_STRING="postgresql://user:password@host:port/database"
 
 **在执行这步操作之前，请务必备份你的数据库。**
 
+### 说明
+
+Janus 的迁移分为两部分：
+
+1. **`0_init`** - Blessing Skin 和 Yggdrasil Connect 插件的表
+   - 这些表由 Laravel 迁移创建，Prisma 不需要执行
+   - 使用 `--applied` 参数告诉 Prisma 这些迁移已完成
+
+2. **`20250618204012_init_janus`** - Janus 专用的 `yggc_*` 表
+   - 这些表由 Prisma 创建
+
+### 执行命令
+
 ```bash
+# 标记 Blessing Skin 的迁移为已完成
 npx prisma migrate resolve --applied 0_init
+
+# 执行 Janus 的迁移（创建 yggc_* 表）
 npx prisma migrate deploy
 ```
 

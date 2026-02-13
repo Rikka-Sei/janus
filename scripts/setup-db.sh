@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Database setup script for Janus
-# Usage: DB_TYPE=mysql or DB_TYPE=postgresql npm run db:setup
-
 set -e
 
 DB_TYPE=${DB_TYPE:-mysql}
@@ -15,11 +12,9 @@ fi
 
 echo "Setting up database for: $DB_TYPE"
 
-# Copy the appropriate schema file
 cp "$PRISMA_DIR/schema.${DB_TYPE}.prisma.example" "$PRISMA_DIR/schema.prisma"
 echo "✓ Copied schema.${DB_TYPE}.prisma.example to schema.prisma"
 
-# Copy the appropriate migration files
 MIGRATION_NAME="20250618204012_init_janus"
 TARGET_DIR="$PRISMA_DIR/migrations/$MIGRATION_NAME"
 SOURCE_DIR="$PRISMA_DIR/migrations/${DB_TYPE}/$MIGRATION_NAME"
@@ -33,5 +28,6 @@ echo "Database setup complete for $DB_TYPE!"
 echo ""
 echo "Next steps:"
 echo "  1. Configure your .env file with database credentials"
-echo "  2. Run: npm run db:generate"
-echo "  3. Run: npm run db:migrate"
+echo "  2. Run: npx prisma generate"
+echo "  3. Run: npx prisma migrate resolve --applied 0_init"
+echo "  4. Run: npx prisma migrate deploy"
