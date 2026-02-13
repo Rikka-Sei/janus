@@ -4,15 +4,32 @@ Janus 是 [Blessing Skin Server](https://github.com/bs-community/blessing-skin-s
 
 由于 Laravel 框架缺乏合适的 OpenID Connect 服务端扩展包，故采取这种外挂 OpenID Connect 服务端的方式为 Blessing Skin Server 实现 Yggdrasil Connect。
 
-Janus 需要与 Blessing Skin Server 使用同一个 MySQL/MariaDB 数据库。不支持 PostgreSQL 和 SQLite 数据库。
+Janus 需要与 Blessing Skin Server 使用同一个数据库，支持 **MySQL/MariaDB** 和 **PostgreSQL**。
+
+## 数据库配置
+
+1. 复制环境配置：
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. 设置 `DB_TYPE=mysql` 或 `DB_TYPE=postgresql`
+
+3. 运行数据库设置脚本：
+   ```bash
+   npm run db:setup
+   npm run db:generate
+   npm run db:migrate
+   ```
 
 ## 环境需求
 
 - Node.js >= 22.12.0
 - Blessing Skin Server >= 6
-    - 需要安装 [Yggdrasil Connect](https://github.com/bs-community/blessing-skin-plugins/blob/master/plugins/yggdrasil-connect) 插件，可在插件市场中下载
-        - 该插件不需要也不可以与原版 Yggdrasil API 插件同时启用，但插件数据可以通用
-        - 在安装完该插件后，请务必阅读该插件的 [README](https://github.com/bs-community/blessing-skin-plugins/blob/master/plugins/yggdrasil-connect/README.md)，了解如何配置该插件
+  - 需要安装 [Yggdrasil Connect](https://github.com/bs-community/blessing-skin-plugins/blob/master/plugins/yggdrasil-connect) 插件，可在插件市场中下载
+    - 该插件不需要也不可以与原版 Yggdrasil API 插件同时启用，但插件数据可以通用
+    - 在安装完该插件后，请务必阅读该插件的 [README](https://github.com/bs-community/blessing-skin-plugins/blob/master/plugins/yggdrasil-connect/README.md)，了解如何配置该插件
 
 ## 部署指南
 

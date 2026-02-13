@@ -60,3 +60,6 @@ prisma/schema.prisma
 
 # Signing Key
 oauth-private.key
+
+#opencode
+.opencode
