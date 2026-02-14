@@ -2,6 +2,14 @@
 
 set -e
 
+# Load .env file if it exists
+SCRIPT_DIR="$(dirname "$0")"
+if [ -f "$SCRIPT_DIR/../.env" ]; then
+    set -a
+    source "$SCRIPT_DIR/../.env"
+    set +a
+fi
+
 DB_TYPE=${DB_TYPE:-mysql}
 PRISMA_DIR="$(dirname "$0")/../prisma"
 
