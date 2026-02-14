@@ -18,6 +18,29 @@ if [[ "$DB_TYPE" != "mysql" && "$DB_TYPE" != "postgresql" ]]; then
     exit 1
 fi
 
+# Build DB_CONNECTION_STRING if not set
+if [[ -z "$DB_CONNECTION_STRING" ]]; then
+    case "$DB_TYPE" in
+        postgresql)
+            DB_CONNECTION_STRING="postgresql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
+            ;;
+        mysql)
+            DB_CONNECTION_STRING="mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
+            ;;
+    esac
+    # Export for subsequent commands and update .env
+    export DB_CONNECTION_STRING
+    if [ -f "$SCRIPT_DIR/../.env" ]; then
+        if grep -q "^DB_CONNECTION_STRING=" "$SCRIPT_DIR/../.env"; then
+            sed -i.bak "s|^DB_CONNECTION_STRING=.*|DB_CONNECTION_STRING=\"${DB_CONNECTION_STRING}\"|" "$SCRIPT_DIR/../.env"
+        else
+            echo "DB_CONNECTION_STRING=\"${DB_CONNECTION_STRING}\"" >> "$SCRIPT_DIR/../.env"
+        fi
+        rm -f "$SCRIPT_DIR/../.env.bak"
+    fi
+    echo "✓ Built DB_CONNECTION_STRING from DB_* fields"
+fi
+
 echo "Setting up database for: $DB_TYPE"
 
 cp "$PRISMA_DIR/schema.${DB_TYPE}.prisma.example" "$PRISMA_DIR/schema.prisma"
