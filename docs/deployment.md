@@ -68,21 +68,21 @@ npm install
 
 将 `.env.example` 复制为 `.env`，然后修改以下配置项：
 
-| 配置项                   | 说明                                                          |
-| ------------------------ | ------------------------------------------------------------- |
-| `DB_TYPE`                | 数据库类型：`mysql` 或 `postgresql`                           |
-| `DB_HOST`                | 数据库 IP                                                     |
-| `DB_PORT`                | 数据库端口                                                    |
-| `DB_USERNAME`            | 数据库用户名                                                  |
-| `DB_PASSWORD`            | 数据库密码                                                    |
-| `DB_NAME`                | 数据库名称                                                    |
-| `ISSUER`                 | OpenID 提供者标识符，必须以 `https://` 开头（localhost 除外） |
-| `BS_SITE_URL`            | Blessing Skin Server 实例的站点地址                           |
-| `SHARED_CLIENT_ID`       | 公用应用的应用 ID（可选）                                     |
-| `TOKEN_EXPIRES_IN_1`     | Access Token 和 ID Token 的过期时间（秒）                     |
-| `TOKEN_EXPIRES_IN_2`     | Refresh Token 的过期时间（秒）                                |
-| `DEVICE_CODE_EXPIRES_IN` | 设备代码的过期时间（秒）                                      |
-| `GRANT_EXPIRES_IN`       | 单次授权的过期时间（秒）                                      |
+| 配置项                   | 说明                                                                                |
+| ------------------------ | ----------------------------------------------------------------------------------- |
+| `DB_TYPE`                | 数据库类型：`mysql` 或 `postgresql`                                                 |
+| `DB_HOST`                | 数据库 IP                                                                           |
+| `DB_PORT`                | 数据库端口                                                                          |
+| `DB_USERNAME`            | 数据库用户名                                                                        |
+| `DB_PASSWORD`            | 数据库密码                                                                          |
+| `DB_NAME`                | 数据库名称                                                                          |
+| `ISSUER`                 | OpenID 提供者标识符，必须以 `https://` 开头（localhost 除外），且**不能以斜杠结尾** |
+| `BS_SITE_URL`            | Blessing Skin Server 实例的站点地址，**不能以斜杠结尾**                             |
+| `SHARED_CLIENT_ID`       | 公用应用的应用 ID（可选）                                                           |
+| `TOKEN_EXPIRES_IN_1`     | Access Token 和 ID Token 的过期时间（秒）                                           |
+| `TOKEN_EXPIRES_IN_2`     | Refresh Token 的过期时间（秒）                                                      |
+| `DEVICE_CODE_EXPIRES_IN` | 设备代码的过期时间（秒）                                                            |
+| `GRANT_EXPIRES_IN`       | 单次授权的过期时间（秒）                                                            |
 
 ### 数据库连接字符串
 
