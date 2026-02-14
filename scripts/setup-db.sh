@@ -48,7 +48,7 @@ echo "✓ Copied schema.${DB_TYPE}.prisma.example to schema.prisma"
 
 MIGRATION_NAME="20250618204012_init_janus"
 TARGET_DIR="$PRISMA_DIR/migrations/$MIGRATION_NAME"
-SOURCE_DIR="$PRISMA_DIR/migrations/${DB_TYPE}/$MIGRATION_NAME"
+SOURCE_DIR="$PRISMA_DIR/migrations-source/${DB_TYPE}/$MIGRATION_NAME"
 
 mkdir -p "$TARGET_DIR"
 cp "$SOURCE_DIR/migration.sql" "$TARGET_DIR/migration.sql"
